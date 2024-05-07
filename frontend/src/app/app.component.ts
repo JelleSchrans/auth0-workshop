@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ApiService } from './services/api.service';
@@ -11,9 +11,11 @@ import { AuthService } from '@auth0/auth0-angular';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'auth0-frontend';
   user$ = this.authService.user$;
+
+  token: string = '';
 
   constructor(
     private apiService: ApiService,
@@ -25,18 +27,27 @@ export class AppComponent {
   }
 
   authenticate() {
-    this.apiService.authenticate().subscribe((res) => {
+    this.apiService.authenticate(this.token).subscribe((res) => {
       console.log(res);
     });
   }
 
   authorize() {
-    this.apiService.authorize().subscribe((res) => {
+    this.apiService.authorize(this.token).subscribe((res) => {
       console.log(res);
     });
   }
 
   logout() {
     this.authService.logout();
+  }
+
+  ngOnInit(): void {
+    this.user$.subscribe((user) => {
+      this.authService.getAccessTokenSilently().subscribe((token) => {
+        console.log(token);
+        this.token = token;
+      });
+    });
   }
 }

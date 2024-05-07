@@ -7,11 +7,19 @@ import { Injectable } from '@angular/core';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  authenticate(){
-    return this.http.get('http://localhost:7000/api/auth0/authentication');
+  authenticate(token: string) {
+    return this.http.get('http://localhost:7000/authentication', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 
-  authorize(){
-    return this.http.get('http://localhost:7000/api/auth0/authorization');
+  authorize(token: string) {
+    return this.http.get('http://localhost:7000/authorization', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 }
