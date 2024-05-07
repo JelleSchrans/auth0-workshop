@@ -5,9 +5,9 @@
 1. [Auth0 Sign-Up](https://auth0.com/signup?place=header&type=button&text=sign%20up)
 2. Ga naar `Applications` => Maak een (frontend) application aan via Auth0.
 3. Ga naar settings van frontend application:
-- Allowed Callback Urls = `localhost:3000`
-- Allowed Logout Urls = `localhost:3000`
-- Allowed Web Origins = `localhost:3000`
+- Allowed Callback Urls = `localhost:4200`
+- Allowed Logout Urls = `localhost:4200`
+- Allowed Web Origins = `localhost:4200`
 3. Ga naar `APIs` => Maak een (backend) application aan via Auth0.
 4. Ga naar settings van API
 - Enable RBAC = `on`
