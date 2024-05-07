@@ -1,0 +1,15 @@
+h1 {
+    text-align: center;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    margin: 10px;
+}
