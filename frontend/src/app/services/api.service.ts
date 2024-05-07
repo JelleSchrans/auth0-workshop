@@ -8,7 +8,7 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   authenticate(token: string) {
-    return this.http.get('http://localhost:7000/authentication', {
+    return this.http.get('https://localhost:7028/authentication', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -16,7 +16,7 @@ export class ApiService {
   }
 
   authorize(token: string) {
-    return this.http.get('http://localhost:7000/authorization', {
+    return this.http.get('https://localhost:7028/authorization', {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -17,6 +17,9 @@ export class AppComponent implements OnInit {
 
   token: string = '';
 
+  authenticateText = '';
+  authorizeText = '';
+
   constructor(
     private apiService: ApiService,
     private authService: AuthService
@@ -28,13 +31,13 @@ export class AppComponent implements OnInit {
 
   authenticate() {
     this.apiService.authenticate(this.token).subscribe((res) => {
-      console.log(res);
+      this.authenticateText = 'Authenticated!';
     });
   }
 
   authorize() {
     this.apiService.authorize(this.token).subscribe((res) => {
-      console.log(res);
+      this.authorizeText = 'Authorized!';
     });
   }
 
@@ -45,7 +48,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.user$.subscribe((user) => {
       this.authService.getAccessTokenSilently().subscribe((token) => {
-        console.log(token);
         this.token = token;
       });
     });
