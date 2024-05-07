@@ -13,6 +13,7 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class AppComponent {
   title = 'auth0-frontend';
+  user$ = this.authService.user$;
 
   constructor(
     private apiService: ApiService,

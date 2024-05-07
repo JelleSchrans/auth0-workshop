@@ -14,7 +14,6 @@ export const appConfig: ApplicationConfig = {
       clientId: 'iCrOYp2gxJOQ75P47buRGeoqo3wyjptT',
       authorizationParams: {
         redirect_uri: 'http://localhost:4200',
-        audience: 'https://hello-world.example.com',
       },
     }),
   ],
