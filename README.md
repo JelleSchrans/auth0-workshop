@@ -16,6 +16,8 @@
 - Enable RBAC = `on`
 - Add Permissions = `on`
 
+5. Ga naar `Permissions` => Maak een permission aan: read:authorization.
+
 ## Dependencies
 
 Dit zijn alle dependencies die nodig zijn voor backend en frontend van de demo voor Auth0.
@@ -44,16 +46,52 @@ Dit zijn alle dependencies die nodig zijn voor backend en frontend van de demo v
    }
    ```
 
-2. Zorg dat er een mogelijkheid is om naar de inlogpagina gestuurd te worden. Dit kan bijvoorbeeld via een button o.i.d. 
+   In de link naar de voor jou benodigde package staat beschreven hoe je dit voor jou framework kan configureren.
 
-3. Als er op deze button geklikt wordt, dan moet de gebruiker naar de inlogpagina van Auth0 gestuurd worden. Vanuit deze UI kan de gebruiker inloggen, maar kunnen ook nieuwe gebruikers aangemaakt worden. Op dit moment zullen er nog geen gebruikers zijn, dus moet er eerst een gebruiker aangemaakt worden.
+2. Zorg dat er een mogelijkheid is om naar de inlogpagina gestuurd te worden. Bijvoorbeeld via een button o.i.d.
 
-4. Als de gebruiker ingelogd is of zich geregistreerd heeft, dan moet de gebruiker terug naar de applicatie gestuurd worden. Hiervoor is de callback url die eerder is geconfigureerd van belang. Auth0 stuurt de gebruiker terug naar deze callback url.
+   Als er op deze button geklikt wordt, dan moet de gebruiker naar de inlogpagina van Auth0 gestuurd worden. Vanuit deze UI kan de gebruiker inloggen, maar kunnen ook nieuwe gebruikers aangemaakt worden. Op dit moment zullen er nog geen gebruikers zijn, dus moet er eerst een gebruiker aangemaakt worden. Gebruik onderstaande code om de gebruiker naar de inlogpagina te sturen.
 
-5. De Auth0 package biedt de mogelijkheid om informatie over de gebruiker op te halen. Dit kan bijvoorbeeld gebruikt worden om de naam van de gebruiker te tonen, zodat de gebruiker weet dat hij/zij ingelogd is. 
+   ```javascript
+   // React
+   const { loginWithRedirect } = useAuth0();
 
-6. Een gebruiker wil natuurlijk ook weer uit kunnen loggen. Auth0 biedt hiervoor een functie die de gebruiker uitlogt, deze heet simpelweg `logout()`. 
+   // Angular
+   constructor(public auth: AuthService) {}
+   loginWithRedirect(): void {
+   this.auth.loginWithRedirect();
+   }
 
+   // Vue
+   const { loginWithRedirect } = useAuth0();
+   //of
+   this.$auth.loginWithRedirect();
+
+   ```
+
+3. Als de gebruiker ingelogd is of zich geregistreerd heeft, dan moet de gebruiker terug naar de applicatie gestuurd worden. Hiervoor is de callback url die eerder is geconfigureerd van belang. Auth0 stuurt de gebruiker terug naar deze callback url.
+
+4. De Auth0 package biedt de mogelijkheid om informatie over de gebruiker op te halen. Dit kan bijvoorbeeld gebruikt worden om de naam van de gebruiker te tonen, zodat de gebruiker weet dat hij/zij ingelogd is.
+
+```javascript
+// React
+const { user } = useAuth0();
+
+//Angular
+constructor(public auth: AuthService) {}
+user$ = this.auth.user$;
+
+// Vue
+const { user } = useAuth0();
+//of
+this.$auth.user;
+```
+
+Via isAuthenticated kan gecheckt worden of er ingelogd is.
+
+5. Een gebruiker wil natuurlijk ook weer uit kunnen loggen. Auth0 biedt hiervoor een functie die de gebruiker uitlogt, deze heet simpelweg `logout()`.
+
+6. Als je zo dadelijk de API aan wilt roepen, dan moet je een token meesturen. Dit token kan je ophalen via de frontend d.m.v `getAccessTokenSilently()`. D.m.v van dit token wordt gecontroleerd of de gebruiker de juiste rechten heeft om bepaalde acties uit te voeren.
 
 ## Backend
 
@@ -62,3 +100,9 @@ Dit zijn alle dependencies die nodig zijn voor backend en frontend van de demo v
 2. Voeg in de `appsettings.json` de juiste data in die je op auth0 hebt gebruikt: domein & audience.
 
 3. Ga naar de controller en comment de authorization annotaties uit.
+
+4. Zorg dat je ingelogd bent, en roep het /authenticate endpoint aan. Je zal zien dat deze wel werkt. Roep daarna het /authorize endpoint aan, en je zal zien dat deze niet werkt.
+
+5. Om het /authorize endpoint te laten werken, moet je de eerder gemaakte permission toevoegen aan de gebruiker. Dit kan via de Auth0 UI. Ga naar `Users & Roles` => `Users (kies hier de eerder gemaakte user)` => `Permissions` => `Add Permissions` => `read:authorization`.
+
+6. Als je nu het /authorize endpoint aanroept, zal je zien dat deze wel werkt.
