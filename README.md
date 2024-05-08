@@ -69,7 +69,7 @@ Dit zijn alle dependencies die nodig zijn voor backend en frontend van de demo v
 
    ```
 
-3. Als de gebruiker ingelogd is of zich geregistreerd heeft, dan moet de gebruiker terug naar de applicatie gestuurd worden. Hiervoor is de callback url die eerder is geconfigureerd van belang. Auth0 stuurt de gebruiker terug naar deze callback url.
+3. Als de gebruiker ingelogd is of zich geregistreerd heeft, dan moet de gebruiker terug naar de applicatie gestuurd worden. Hiervoor is de callback url die eerder is geconfigureerd van belang. Auth0 stuurt de gebruiker terug naar deze url nadat een gebruiker de benodigde acties heeft uitgevoerd. 
 
 4. De Auth0 package biedt de mogelijkheid om informatie over de gebruiker op te halen. Dit kan bijvoorbeeld gebruikt worden om de naam van de gebruiker te tonen, zodat de gebruiker weet dat hij/zij ingelogd is.
 
@@ -89,13 +89,13 @@ this.$auth.user;
 
 Via isAuthenticated kan gecheckt worden of er ingelogd is.
 
-5. Een gebruiker wil natuurlijk ook weer uit kunnen loggen. Auth0 biedt hiervoor een functie die de gebruiker uitlogt, deze heet simpelweg `logout()`.
+5. Een gebruiker wil natuurlijk ook weer uit kunnen loggen. Auth0 biedt hiervoor een functie die de gebruiker uitlogt, deze heet simpelweg `logout()`. Ook hier zal de gebruiker naar de eerder geconfigureerde callback url gestuurd worden.
 
 6. Als je zo dadelijk de API aan wilt roepen, dan moet je een token meesturen. Dit token kan je ophalen via de frontend d.m.v `getAccessTokenSilently()`. D.m.v van dit token wordt gecontroleerd of de gebruiker de juiste rechten heeft om bepaalde acties uit te voeren.
 
 ## Backend
 
-1. Als het inloggen werkt, dan kan er in de `Program.cs` de authentication en authorization uitgecomment worden. Installeer vervolgens het eerder benoemde package.
+1. Ga naar de `.sln` file van de backend. Als het inloggen werkt, dan kan er in de `Program.cs` de authentication en authorization uitgecomment worden. Installeer vervolgens het eerder benoemde package in de solution.
 
 2. Voeg in de `appsettings.json` de juiste data in die je op auth0 hebt gebruikt: domein & audience.
 
