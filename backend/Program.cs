@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using backend.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,15 +21,26 @@ builder.Services.AddCors(options =>
     });
 });
 
-/*builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
     options.Audience = builder.Configuration["Auth0:Audience"];
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        NameClaimType = ClaimTypes.NameIdentifier
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true
     };
-});*/
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("read:authorized", policy =>
+    {
+        policy.Requirements.Add(new RbacRequirement("read:authorized"));
+    });
+});
+
+builder.Services.AddSingleton<IAuthorizationHandler, RbacHandler>();
 
 /*builder.Services.AddAuthorization(options =>
 {

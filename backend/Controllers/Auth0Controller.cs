@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace backend.Controllers
 {
@@ -8,19 +9,19 @@ namespace backend.Controllers
     public class Auth0Controller : ControllerBase
     {
         [HttpGet("/authentication")]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult<string> GetAuthentication()
         {
             const string authenticated = "You have been authenticated!";
-            return Ok(authenticated);
+            return Ok(JsonSerializer.Serialize(authenticated));
         }
 
         [HttpGet("/authorization")]
-        /*[Authorize("read:authorized")]*/
+        [Authorize("read:authorized")]
         public ActionResult<string> GetAuthorization()
         {
             const string authorized = "You have been authorized!";
-            return Ok(authorized);
+            return Ok(JsonSerializer.Serialize(authorized));
         }
     }
 }
