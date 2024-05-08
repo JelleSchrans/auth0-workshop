@@ -9,7 +9,7 @@ namespace backend.Controllers
     public class Auth0Controller : ControllerBase
     {
         [HttpGet("/authentication")]
-        [Authorize]
+        //[Authorize]
         public ActionResult<string> GetAuthentication()
         {
             const string authenticated = "You have been authenticated!";
@@ -17,7 +17,7 @@ namespace backend.Controllers
         }
 
         [HttpGet("/authorization")]
-        [Authorize("read:authorized")]
+        //[Authorize("read:authorized")]
         public ActionResult<string> GetAuthorization()
         {
             const string authorized = "You have been authorized!";
