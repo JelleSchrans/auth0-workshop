@@ -10,8 +10,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideAuth0({
-      domain: 'dev-62x3htw4jzlvmjkh.us.auth0.com',
-      clientId: 'iCrOYp2gxJOQ75P47buRGeoqo3wyjptT',
+      domain: 'YOUR_DOMAIN.auth0.com',
+      clientId: 'YOUR_CLIENT_ID',
       authorizationParams: {
         redirect_uri: 'http://localhost:4200',
         audience: 'http://localhost:7000', 

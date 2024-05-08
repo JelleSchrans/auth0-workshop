@@ -34,7 +34,7 @@ Dit zijn alle dependencies die nodig zijn voor backend en frontend van de demo v
 
 ## Frontend
 
-1. Configureer Auth0 in je front-end applicatie. Hiervoor zijn onderstaande waarden nodig:
+1. Installeer de benodigde package, en configureer Auth0 in je front-end applicatie. Hiervoor zijn onderstaande waarden nodig:
 
    ```javascript
    {
@@ -95,7 +95,7 @@ Via isAuthenticated kan gecheckt worden of er ingelogd is.
 
 ## Backend
 
-1. Als het inloggen werkt, dan kan er in de `Program.cs` de authentication en authorization uitgecomment worden.
+1. Als het inloggen werkt, dan kan er in de `Program.cs` de authentication en authorization uitgecomment worden. Installeer vervolgens het eerder benoemde package.
 
 2. Voeg in de `appsettings.json` de juiste data in die je op auth0 hebt gebruikt: domein & audience.
 
@@ -103,6 +103,6 @@ Via isAuthenticated kan gecheckt worden of er ingelogd is.
 
 4. Zorg dat je ingelogd bent, en roep het /authenticate endpoint aan. Je zal zien dat deze wel werkt. Roep daarna het /authorize endpoint aan, en je zal zien dat deze niet werkt.
 
-5. Om het /authorize endpoint te laten werken, moet je de eerder gemaakte permission toevoegen aan de gebruiker. Dit kan via de Auth0 UI. Ga naar `Users & Roles` => `Users (kies hier de eerder gemaakte user)` => `Permissions` => `Add Permissions` => `read:authorization`.
+5. Om het /authorize endpoint te laten werken, moet je de eerder gemaakte permission toevoegen aan de gebruiker. Dit kan via de Auth0 UI. Ga naar `Users & Roles` => `Users (kies hier de eerder gemaakte user)` => `Permissions` => `Add Permissions` => `read:authorization`. 
 
 6. Als je nu het /authorize endpoint aanroept, zal je zien dat deze wel werkt.

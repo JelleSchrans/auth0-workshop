@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   title = 'auth0-frontend';
   user$ = this.authService.user$;
 
-  token: string = '';
+  token: any = null;
 
   authenticateText = '';
   authorizeText = '';
@@ -30,14 +30,24 @@ export class AppComponent implements OnInit {
   }
 
   authenticate() {
-    this.apiService.authenticate(this.token).subscribe((res) => {
-      this.authenticateText = 'Authenticated!';
+    this.apiService.authenticate(this.token).subscribe({
+      next: (res: any) => {
+        this.authenticateText = res;
+      },
+      error: (err) => {
+        this.authenticateText = 'Not authenticated';
+      },
     });
   }
 
   authorize() {
-    this.apiService.authorize(this.token).subscribe((res) => {
-      this.authorizeText = 'Authorized!';
+    this.apiService.authorize(this.token).subscribe({
+      next: (res: any) => {
+        this.authorizeText = res;
+      },
+      error: (err) => {
+        this.authorizeText = 'Not authorized';
+      },
     });
   }
 
